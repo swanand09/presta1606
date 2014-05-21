@@ -49,19 +49,74 @@
 	{/foreach}
 {/if}
 		{$HOOK_HEADER}
-		<link rel="stylesheet" href="http{if Tools::usingSecureMode()}s{/if}://fonts.googleapis.com/css?family=Open+Sans:300,600" type="text/css" media="all" />
+		
 		<!--[if IE 8]>
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body{if isset($page_name)} id="{$page_name|escape:'html':'UTF-8'}"{/if} class="{if isset($page_name)}{$page_name|escape:'html':'UTF-8'}{/if}{if isset($body_classes) && $body_classes|@count} {implode value=$body_classes separator=' '}{/if}{if $hide_left_column} hide-left-column{/if}{if $hide_right_column} hide-right-column{/if}{if $content_only} content_only{/if} lang_{$lang_iso}">
+	<body class='home' {if isset($page_name)} id="{$page_name|escape:'html':'UTF-8'}"{/if} >
 	{if !$content_only}
 		{if isset($restricted_country_mode) && $restricted_country_mode}
 			<div id="restricted-country">
 				<p>{l s='You cannot place a new order from your country.'} <span class="bold">{$geolocation_country}</span></p>
 			</div>
 		{/if}
+                <!--Before header-->
+                <div class="row size-text">
+                  <div class="container">
+                      {hook h="displayNav"}
+                  </div>
+                </div>
+
+                <!--Logo, searchbox, numéro de téléphone -->
+                <div class="row header">
+                  <div class="container">
+                    <div class="col-md-4">
+                        <a href="{$base_dir}" title="{$shop_name|escape:'html':'UTF-8'}">
+                            <img src="{$logo_url}" alt="{$shop_name|escape:'html':'UTF-8'}"{if $logo_image_width} width="{$logo_image_width}"{/if}{if $logo_image_height} height="{$logo_image_height}"{/if}/>
+			</a>
+                    </div>
+                    <div class="col-md-5 col-md-offset-1">
+                      <form class="navbar-form" role="search">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                          <div class="input-group-btn">
+                              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                      </div>
+                      </form>
+                    </div>
+                    <div class="col-md-6 besoin-aide">
+                      <p>Besoin D'aide ? <br><span class="numero">04-5800-5900</span></p>
+                    </div>
+                  </div>
+                </div>
+                  <!--Menu , panier -->
+                <div class="row menu-panier">
+                  <div class="container">
+                    <div class="col-md-13">
+                      <ul class="nav navbar-nav">
+                              <li class='active'><a href="#">Les Téléphones</a></li>
+                              <li><a href="#">Forfaits Adaptés</a></li>
+                              <li><a href="#">Vos Solutions</a></li>
+                              <li><a href="#"> Contactez Nous</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-3"><a href="#" class='icon-mon-sac'>Mon Sac <span class="label">1</span></a></div>
+                  </div>
+                </div>
+
+                <!--After menu -->
+                <div class="row after-menu">
+                  <div class="container">
+                    <div class="col-md-4 garantie">Garantie 1 an</div>
+                    <div class="col-md-4 telephone-debloque"> Téléphones Débloqués</div>
+                    <div class="col-md-4 telephone-stock">Téléphones en stock</div>
+                    <div class="col-md-4 expedition">Expédition sous 48h</div>
+                  </div>
+                </div>
+                {*
 		<div id="page">
 			<div class="header-container">
 				<header id="header">
@@ -106,4 +161,5 @@
 						<div id="left_column" class="column col-xs-12 col-sm-{$left_column_size|intval}">{$HOOK_LEFT_COLUMN}</div>
 						{/if}
 						<div id="center_column" class="center_column col-xs-12 col-sm-{12 - $left_column_size - $right_column_size}">
-	{/if}
+	*}
+                                                {/if}
